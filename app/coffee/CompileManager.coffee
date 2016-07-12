@@ -78,6 +78,20 @@ module.exports = CompileManager =
 						OutputCacheManager.saveOutputFiles outputFiles, compileDir,  (error, newOutputFiles) ->
 							callback null, newOutputFiles
 	
+	stopCompile: (project_id, user_id, session_id, callback = (error) ->) ->
+		streamId = "#{project_id}:#{user_id}:#{session_id}"
+		console.log "CANCEL #{streamId}"
+		# stream = CompileManager.INPROGRESS_STREAMS[streamId]
+		# logger.log {project_id, session_id}, "stopping compile"
+		# if !stream?
+		# 	error = new Error("No such session")
+		# 	error.statusCode = 404
+		# 	logger.log {err: error, project_id, session_id}, "session not found"
+		# 	return callback error
+
+		# stream.emit "kill"
+		callback()
+
 	clearProject: (project_id, user_id, _callback = (error) ->) ->
 		callback = (error) ->
 			_callback(error)
